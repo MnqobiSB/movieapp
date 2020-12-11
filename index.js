@@ -10,7 +10,7 @@ const autocompleteConfig = {
 		return movie.Title;
 	},
 	async fetchData (searchTerm) {
-		const response = await axios.get('http://www.omdbapi.com/', {
+		const response = await axios.get('https://www.omdbapi.com/', {
 			params: {
 				apikey: '2a7607fb',
 				s: searchTerm
@@ -43,7 +43,7 @@ createAutoComplete({
 let letfMovie;
 let rightMovie;
 const onMovieSelect = async (movie, summaryElement, side) => {
-	const response = await axios.get('http://www.omdbapi.com/', {
+	const response = await axios.get('https://www.omdbapi.com/', {
 		params: {
 			apikey: '2a7607fb',
 			i: movie.imdbID
@@ -62,8 +62,12 @@ const onMovieSelect = async (movie, summaryElement, side) => {
 };
 
 const runComparison = () => {
-	const leftSideStats = document.querySelectorAll('#left-summary .notification');
-	const rightSideStats = document.querySelectorAll('#right-summary .notification');
+	const leftSideStats = document.querySelectorAll(
+		'#left-summary .notification'
+	);
+	const rightSideStats = document.querySelectorAll(
+		'#right-summary .notification'
+	);
 
 	leftSideStats.forEach((leftStat, index) => {
 		const rightStat = rightSideStats[index];
@@ -84,7 +88,9 @@ const runComparison = () => {
 };
 
 const movieTemplate = (movieDetail) => {
-	const dollars = parseInt(movieDetail.BoxOffice.replace(/\$/g, '').replace(/,/g, ''));
+	const dollars = parseInt(
+		movieDetail.BoxOffice.replace(/\$/g, '').replace(/,/g, '')
+	);
 	const metascore = parseInt(movieDetail.Metascore);
 	const imdbRating = parseFloat(movieDetail.imdbRating);
 	const imdbVotes = parseInt(movieDetail.imdbVotes.replace(/,/g, ''));
